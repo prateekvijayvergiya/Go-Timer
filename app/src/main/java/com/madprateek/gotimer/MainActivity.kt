@@ -9,6 +9,7 @@ import android.os.CountDownTimer
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.madprateek.gotimer.Util.NotificationUtil
 import com.madprateek.gotimer.Util.PrefUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -76,6 +77,7 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         initTimer()
         removeAlarm(this)
+        NotificationUtil.hideTimerNotification(this)
     }
 
     override fun onPause() {
@@ -84,9 +86,10 @@ class MainActivity : AppCompatActivity() {
         if (timerState == TimerState.Running){
             timer.cancel()
             val wakeUpTime = setAlarm(this, nowSeconds, secondsRemaining)
+            NotificationUtil.showTimerRunning(this, wakeUpTime)
         }
         else if (timerState == TimerState.Paused){
-
+            NotificationUtil.showTimerPaused(this)
         }
 
         PrefUtil.setPreviousTimerLengthInSeconds(timerLengthSeconds, this)
