@@ -31,11 +31,20 @@
                 android:exported="false">
             <intent-filter>
                 <action android:name="stop"/>
-                <action android:name="pause" />
-                <action android:name="resume" />
-                <action android:name="start" />
+                <action android:name="pause"/>
+                <action android:name="resume"/>
+                <action android:name="start"/>
             </intent-filter>
         </receiver>
+
+        <activity android:name=".SettingsActivity"
+        android:label="Settings"
+        android:parentActivityName=".MainActivity"
+        android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.madprateek.gotimer.SettingsActivity"></meta-data>
+        </activity>
     </application>
 
 </manifest>

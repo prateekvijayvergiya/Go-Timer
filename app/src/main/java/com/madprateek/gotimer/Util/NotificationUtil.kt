@@ -89,12 +89,6 @@ class NotificationUtil {
             nManager.notify(TIMER_ID, nBuilder?.build())
         }
 
-
-        fun hideTimerNotification(context: Context){
-            val nManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            nManager.cancel(TIMER_ID)
-        }
-
         private fun <T> getPendingIntentWithStack(context: Context, javaClass: Class<T>): PendingIntent{
             val resultIntent = Intent(context, javaClass)
             resultIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
@@ -104,6 +98,11 @@ class NotificationUtil {
             stackBuilder.addNextIntent(resultIntent)
 
             return stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+        }
+
+        fun hideTimerNotification(context: Context){
+            val nManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            nManager.cancel(TIMER_ID)
         }
 
         private fun getBasicNotificationBuilder(context: Context, ChannelId: String, playSound: Boolean): NotificationCompat.Builder? {
